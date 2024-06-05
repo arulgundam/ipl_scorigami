@@ -2,12 +2,6 @@
 
 IPL Scorigami is a web application that visualizes the first and second innings scores of all completed IPL games, including those decided by the Duckworth–Lewis–Stern (DLS) method. This project uses Flask for the backend, Plotly for interactive plotting, and SQLAlchemy for database interactions. Bootstrap CSS is used for presentation and styling.
 
-## Previous Repos
-
-Due to struggle with database migration, extended version history is stored at two previous repos:
-- https://github.com/arulgundam/ipl_scorigami_deprecated2
-- https://github.com/arulgundam/ipl_scorigami_deprecated
-
 ## Features
 
 - Interactive plot of IPL match scores
@@ -51,6 +45,12 @@ Due to struggle with database migration, extended version history is stored at t
 - `static/js/`: JavaScript files
 - `static/css/`: CSS files
 - `data/`: Data files (CSV)
+
+## Extended Version History
+
+Due to struggle with database migration, extended version history is stored at two previous repos:
+- https://github.com/arulgundam/ipl_scorigami_deprecated2
+- https://github.com/arulgundam/ipl_scorigami_deprecated
 
 ## License
 
