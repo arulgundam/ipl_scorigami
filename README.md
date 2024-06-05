@@ -34,7 +34,7 @@ Due to struggle with database migration, extended version history is stored at t
 
 4. Run the application:
     ```bash
-    flask run
+    python app.py
     ```
 
 ## Usage

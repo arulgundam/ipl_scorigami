@@ -62,6 +62,12 @@ body {
     padding-top: 20px;
 }
 
+/* Custom CSS for filter dropdowns */
+.form-control-sm {
+    text-align: center;
+    width: 150px; /* Adjust the width as needed */
+}
+
 /* Footer Styles */
 .footer {
     background-color: #6c757d;
