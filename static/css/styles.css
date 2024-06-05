@@ -1,0 +1,78 @@
+/* Body Styles */
+body {
+    background-color: #f8f9fa; /* Light grey background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Banner Styles */
+.blue-banner {
+    background-color: #1E88E5; /* Blue banner background color */
+    padding: 20px; /* Adjust as needed */
+    color: #fff; /* White text color */
+    font-family: 'Freeman', sans-serif;
+}
+
+/* Main Container Styles */
+.main-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f8f9fa; /* Light grey background for main container */
+    flex: 1;
+}
+
+.plot-container {
+    background-color: #f8f9fa; /* Light grey background for plot */
+    width: 100%;
+    overflow: scroll;
+}
+
+/* Card Styles */
+.main-card, .jon-bois-card {
+    background-color: #f8f9fa; /* Light grey background for cards */
+    border: 1px solid #ced4da; /* Light grey border */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+/* Center Card Content */
+.card-body {
+    text-align: center;
+}
+
+/* Color for Text and Links */
+.card-text {
+    color: #343a40; /* Dark grey text */
+}
+
+/* Specific styles for Jon Bois' Video Description */
+.jon-bois-card .card-body {
+    text-align: left; /* Align text to the left */
+}
+
+/* Adjust layout for Jon Bois' Video Description */
+.jon-bois-card .card-body .d-flex {
+    flex-direction: row; /* Set flex direction to row */
+}
+
+/* Filters Container Styles */
+.filters-container {
+    background-color: #f8f9fa;
+    padding-top: 20px;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #6c757d;
+    padding: 10px;
+    color: white;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
