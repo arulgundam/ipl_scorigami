@@ -132,11 +132,13 @@ fetch('/data')
             title: 'IPL Scorigami',
             xaxis: {
                 title: 'First Innings Score',
-                range: [40, 300]
+                range: [40, 300],
+                autorange: true
             },
             yaxis: {
                 title: 'Second Innings Score',
-                range: [40, 300]
+                range: [40, 300],
+                autorange: true
             },
             hovermode: 'closest',
             height: 600,

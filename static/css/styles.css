@@ -82,3 +82,8 @@ body {
     color: white;
     text-decoration: none;
 }
+
+/* Hover style for footer links */
+.footer a:hover {
+    text-decoration: underline;
+}
