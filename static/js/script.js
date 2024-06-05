@@ -3,6 +3,35 @@ fetch('/data')
     .then(data => {
         console.log(data);
 
+        // Color mapping for teams
+        const teamColors = {
+            "Chennai Super Kings": "#fdc204",
+            "Deccan Chargers": "#1a4667",
+            "Delhi Capitals (formerly Daredevils)": "#265098",
+            "Gujarat Lions": "#fe4a21",
+            "Gujarat Titans": "#041839",
+            "Kochi Tuskers Kerala": "#ff5917",
+            "Kolkata Knight Riders": "#8653bc",
+            "Lucknow Super Giants": "#8ec2bd",
+            "Mumbai Indians": "#329bea",
+            "Pune Warriors India": "#2f9cc3",
+            "Punjab Kings (formerly Kings XI)": "#dd1f2d",
+            "Rajasthan Royals": "#ff65ab",
+            "Rising Pune Supergiant": "#b93182",
+            "Royal Challengers Bengaluru": "#fa0505",
+            "Sunrisers Hyderabad": "#fba81a"
+        };
+
+        // Function to assign color based on winner
+        const assignColor = (team) => {
+            if (teamFilter.value === '') {
+                return 'rgb(30, 136, 229)'
+            } else {
+                return teamColors[team];
+            }
+        };
+        
+
         // Filter out null values and format seasons
         const seasons = [...new Set(data.map(d => d.season).filter(season => season !== null))]
             .map(season => parseInt(season))
@@ -35,17 +64,16 @@ fetch('/data')
             const updatedFirstInningsScores = filteredData.map(d => parseInt(d.first_innings_score));
             const updatedSecondInningsScores = filteredData.map(d => parseInt(d.second_innings_score));
 
+            const updatedColors = filteredData.map(d => assignColor(d.winner));
+
             const updatedTrace = {
                 x: updatedFirstInningsScores,
                 y: updatedSecondInningsScores,
                 mode: 'markers',
                 marker: {
-                    size: 8,
+                    size: 12,
+                    color: updatedColors, // Assign colors based on winners
                     symbol: 'square',
-                    line: {
-                        color: 'rgb(30, 136, 229)',
-                        width: 0.5
-                    },
                     opacity: 0.8
                 },
                 type: 'scatter',
@@ -81,6 +109,7 @@ fetch('/data')
             mode: 'markers',
             marker: {
                 size: 8,
+                color: 'rgb(30, 136, 229)', // Default color
                 symbol: 'square',
                 line: {
                     color: 'rgb(30, 136, 229)',
