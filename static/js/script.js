@@ -22,7 +22,9 @@ fetch('/data')
         };
 
         const assignColor = (team, filterMode, selectedTeam) => {
-            if (filterMode && selectedTeam) {
+            if (!selectedTeam) {
+                return 'rgb(30, 136, 229)'; // Default color when no team is selected
+            } else if (filterMode) {
                 return team === selectedTeam ? 'green' : 'red';
             } else {
                 return team ? teamColors[team] || 'rgb(30, 136, 229)' : 'rgb(30, 136, 229)';
@@ -35,28 +37,42 @@ fetch('/data')
 
         const teams = [...new Set(data.map(d => d.home_team).filter(team => team !== null))].sort();
 
-        const seasonFilter = document.getElementById('seasonFilter');
         const teamFilter = document.getElementById('teamFilter');
         const resetFiltersBtn = document.getElementById('resetFilters');
         const colorSwitch = document.getElementById('flexSwitchCheckChecked');
 
-        seasons.forEach(season => {
-            seasonFilter.innerHTML += `<option value="${season}">${season}</option>`;
-        });
+        // Clear existing options to prevent duplicates
+        teamFilter.innerHTML = '<option value="">All Teams</option>';
 
         teams.forEach(team => {
             teamFilter.innerHTML += `<option value="${team}">${team}</option>`;
         });
 
+        const seasonRangeSlider = document.getElementById('seasonRangeSlider');
+        noUiSlider.create(seasonRangeSlider, {
+            start: [seasons[0], seasons[seasons.length - 1]],
+            connect: true,
+            range: {
+                'min': seasons[0],
+                'max': seasons[seasons.length - 1]
+            },
+            step: 1,
+            tooltips: true,
+            format: {
+                to: value => Math.round(value),
+                from: value => Math.round(value)
+            }
+        });
+
         const applyFilters = () => {
-            const selectedSeason = seasonFilter.value;
+            const selectedSeasonRange = seasonRangeSlider.noUiSlider.get();
             const selectedTeam = teamFilter.value;
             const filterMode = colorSwitch.checked;
 
             colorSwitch.disabled = !selectedTeam;
 
             const filteredData = data.filter(d =>
-                (selectedSeason === "" || parseInt(d.season) === parseInt(selectedSeason)) &&
+                (selectedSeasonRange[0] <= d.season && d.season <= selectedSeasonRange[1]) &&
                 (selectedTeam === "" || d.home_team === selectedTeam || d.away_team === selectedTeam)
             );
 
@@ -90,7 +106,7 @@ fetch('/data')
         };
 
         const resetFilters = () => {
-            seasonFilter.value = '';
+            seasonRangeSlider.noUiSlider.set([seasons[0], seasons[seasons.length - 1]]);
             teamFilter.value = '';
             colorSwitch.checked = false;
             colorSwitch.disabled = true;
@@ -145,7 +161,7 @@ fetch('/data')
 
         Plotly.newPlot('plot', [trace], layout);
 
-        seasonFilter.addEventListener('change', applyFilters);
+        seasonRangeSlider.noUiSlider.on('update', applyFilters);
         teamFilter.addEventListener('change', applyFilters);
         colorSwitch.addEventListener('change', applyFilters);
         resetFiltersBtn.addEventListener('click', resetFilters);

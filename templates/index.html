@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPL Scorigami</title>
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap + noUiSlider CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +32,7 @@
         <div class="row mt-2 mb-2 filters-container">
             <div class="col-md-10 offset-md-1 d-flex justify-content-center align-items-center">
                 <!-- Season Filter -->
-                <div class="form-group mb-0 mr-3">
+                <div id="seasonRangeSlider" class="mr-3" style="width: 200px;"></div>
                     <select id="seasonFilter" class="form-control form-control-sm btn-outline-info">
                         <option value="">All IPL Seasons</option>
                         <!-- Options will be populated dynamically -->
@@ -95,5 +96,8 @@
     <!-- Plotly JS and Fetch Data -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+     <!-- Include noUiSlider JS -->
+     <script src="https://cdn.jsdelivr.net/npm/nouislider/distribute/nouislider.min.js"></script>
+     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
