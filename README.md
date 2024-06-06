@@ -59,6 +59,7 @@ This project is licensed under the MIT License.
 
 - Jon Bois for the concept of Scorigami
 - Dave Mattingly and Brian Sayre for creating and updating https://nflscorigami.com/
+- Narro Design's Scorigami-adjacent data reporting at https://narro.design/
 
 ## Contributing
 
