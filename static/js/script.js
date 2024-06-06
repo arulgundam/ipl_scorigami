@@ -10,7 +10,7 @@ fetch('/data')
             "Delhi Capitals (formerly Daredevils)": "#265098",
             "Gujarat Lions": "#fe4a21",
             "Gujarat Titans": "#041839",
-            "Kochi Tuskers Kerala": "#ff5917",
+            "Kochi Tuskers Kerala": "#d73a19",
             "Kolkata Knight Riders": "#8653bc",
             "Lucknow Super Giants": "#8ec2bd",
             "Mumbai Indians": "#329bea",
@@ -22,15 +22,9 @@ fetch('/data')
             "Sunrisers Hyderabad": "#fba81a"
         };
 
-        // Function to assign color based on winner
         const assignColor = (team) => {
-            if (teamFilter.value === '') {
-                return 'rgb(30, 136, 229)'
-            } else {
-                return teamColors[team];
-            }
+            return teamColors[team] || 'rgb(30, 136, 229)'; // Default to blue if color not found
         };
-        
 
         // Filter out null values and format seasons
         const seasons = [...new Set(data.map(d => d.season).filter(season => season !== null))]
@@ -42,6 +36,8 @@ fetch('/data')
         const seasonFilter = document.getElementById('seasonFilter');
         const teamFilter = document.getElementById('teamFilter');
         const resetFiltersBtn = document.getElementById('resetFilters');
+        const colorModeSwitch = document.getElementById('flexSwitchCheckChecked');
+        const colorModeSwitchContainer = document.getElementById('colorModeSwitchContainer');
 
         seasons.forEach(season => {
             seasonFilter.innerHTML += `<option value="${season}">${season}</option>`;
@@ -55,6 +51,7 @@ fetch('/data')
         const applyFilters = () => {
             const selectedSeason = seasonFilter.value;
             const selectedTeam = teamFilter.value;
+            const colorByTeamWin = colorModeSwitch.checked;
 
             const filteredData = data.filter(d =>
                 (selectedSeason === "" || parseInt(d.season) === parseInt(selectedSeason)) &&
@@ -64,21 +61,28 @@ fetch('/data')
             const updatedFirstInningsScores = filteredData.map(d => parseInt(d.first_innings_score));
             const updatedSecondInningsScores = filteredData.map(d => parseInt(d.second_innings_score));
 
-            const updatedColors = filteredData.map(d => assignColor(d.winner));
+            const updatedColors = filteredData.map(d => {
+                if (selectedTeam === "") {
+                    return assignColor();
+                } else if (colorByTeamWin) {
+                    return d.winner === selectedTeam ? 'green' : 'red';
+                } else {
+                    return assignColor(d.winner);
+                }
+            });
 
             const updatedTrace = {
                 x: updatedFirstInningsScores,
                 y: updatedSecondInningsScores,
                 mode: 'markers',
                 marker: {
-                    size: 12,
-                    color: updatedColors, // Assign colors based on winners
+                    size: 8,
+                    color: updatedColors,
                     symbol: 'square',
                     opacity: 0.8
                 },
                 type: 'scatter',
-                text: filteredData.map(d => `<i>${d.description}</i><br><span>${d.name} | <b>${d.result}</b> | 1st: ${d.first_innings_score}, 2nd: ${d.second_innings_score}<span>`), // Updated hover text format
-                hoverinfo: 'text',
+                text: filteredData.map(d => `<i>${d.description}</i><br><span>${d.name} | <b>${d.result}</b> | 1st: ${d.first_innings_score}, 2nd: ${d.second_innings_score}</span>`),
                 hoverlabel: {
                     bgcolor: 'white',
                     bordercolor: 'black',
@@ -88,68 +92,44 @@ fetch('/data')
                 hovertemplate: '%{text}' // Display hover text
             };
 
+            const layout = {
+                title: 'IPL Scorigami',
+                xaxis: {
+                    title: 'First Innings Score',
+                    range: 'auto'
+                },
+                yaxis: {
+                    title: 'Second Innings Score',
+                    range: 'auto'
+                },
+                hovermode: 'closest',
+                height: 600,
+                dragmode: false,
+                selectdirection: 'none'
+            };
+
             Plotly.react('plot', [updatedTrace], layout);
-        };
 
-        // Reset Filters Function
-        const resetFilters = () => {
-            seasonFilter.value = '';
-            teamFilter.value = '';
-
-            applyFilters();
+            // Show/hide the color mode switch based on team filter
+            if (selectedTeam !== "") {
+                colorModeSwitchContainer.style.display = 'block';
+            } else {
+                colorModeSwitchContainer.style.display = 'none';
+            }
         };
 
         // Initial plot
-        const firstInningsScores = data.map(d => parseInt(d.first_innings_score));
-        const secondInningsScores = data.map(d => parseInt(d.second_innings_score));
+        applyFilters();
 
-        const trace = {
-            x: firstInningsScores,
-            y: secondInningsScores,
-            mode: 'markers',
-            marker: {
-                size: 8,
-                color: 'rgb(30, 136, 229)', // Default color
-                symbol: 'square',
-                line: {
-                    color: 'rgb(30, 136, 229)',
-                    width: 0.5
-                },
-                opacity: 0.8
-            },
-            type: 'scatter',
-            text: data.map(d => `<i>${d.description}</i><br><span>${d.name} | <b>${d.result}</b> | 1st: ${d.first_innings_score}, 2nd: ${d.second_innings_score}<span>`),
-            hoverlabel: {
-                bgcolor: 'white',
-                bordercolor: 'black',
-                font: { size: 12, color: 'black' },
-                namelength: 0
-            },
-            hovertemplate: '%{text}' // Display hover text
-        };
-
-        const layout = {
-            title: 'IPL Scorigami',
-            xaxis: {
-                title: 'First Innings Score',
-                range: [40, 300],
-                autorange: true
-            },
-            yaxis: {
-                title: 'Second Innings Score',
-                range: [40, 300],
-                autorange: true
-            },
-            hovermode: 'closest',
-            height: 600,
-            dragmode: false,
-            selectdirection: 'none'
-        };
-
-        Plotly.newPlot('plot', [trace], layout);
-
-        // Attach event listeners to filters and reset button
+        // Event listeners for filters and switch
         seasonFilter.addEventListener('change', applyFilters);
         teamFilter.addEventListener('change', applyFilters);
-        resetFiltersBtn.addEventListener('click', resetFilters);
-    });
+        colorModeSwitch.addEventListener('change', applyFilters);
+        resetFiltersBtn.addEventListener('click', () => {
+            seasonFilter.value = '';
+            teamFilter.value = '';
+            colorModeSwitch.checked = false;
+            applyFilters();
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
