@@ -35,8 +35,7 @@ IPL Scorigami is a web application that visualizes the first and second innings 
 
 - Access the application at `http://127.0.0.1:5000/`
 - Use the filters to view specific seasons or teams
-- Click on data points in the plot to see detailed match information
-- Reset data using `http://127.0.0.1:5000/reset_data`
+- Hover over data points in the plot to see detailed match information
 
 ## Project Structure
 
@@ -59,8 +58,7 @@ This project is licensed under the MIT License.
 ## Acknowledgments
 
 - Jon Bois for the concept of Scorigami
-- Plotly for interactive plotting
-- Flask for the web framework
+- Dave Mattingly and Brian Sayre for creating and updating https://nflscorigami.com/
 
 ## Contributing
 

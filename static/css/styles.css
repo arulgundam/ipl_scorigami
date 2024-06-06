@@ -1,6 +1,6 @@
 /* Body Styles */
 body {
-    background-color: #f8f9fa; /* Light grey background */
+    background-color: #f8f9fa; 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -8,9 +8,9 @@ body {
 
 /* Banner Styles */
 .blue-banner {
-    background-color: #1E88E5; /* Blue banner background color */
-    padding: 20px; /* Adjust as needed */
-    color: #fff; /* White text color */
+    background-color: #1E88E5; 
+    padding: 20px; 
+    color: #fff; 
     font-family: 'Freeman', sans-serif;
 }
 
@@ -18,7 +18,7 @@ body {
 .main-container {
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: #f8f9fa; /* Light grey background for main container */
+    background-color: #f8f9fa; 
     flex: 1;
 }
 
@@ -27,17 +27,17 @@ body {
 }
 
 .plot-container {
-    background-color: #f8f9fa; /* Light grey background for plot */
+    background-color: #f8f9fa; 
     width: 100%;
     overflow: scroll;
 }
 
 /* Card Styles */
 .main-card, .jon-bois-card {
-    background-color: #f8f9fa; /* Light grey background for cards */
-    border: 1px solid #ced4da; /* Light grey border */
+    background-color: #f8f9fa; 
+    border: 1px solid #ced4da; 
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 /* Center Card Content */
@@ -47,17 +47,17 @@ body {
 
 /* Color for Text and Links */
 .card-text {
-    color: #343a40; /* Dark grey text */
+    color: #343a40; 
 }
 
 /* Specific styles for Jon Bois' Video Description */
 .jon-bois-card .card-body {
-    text-align: left; /* Align text to the left */
+    text-align: left; 
 }
 
 /* Adjust layout for Jon Bois' Video Description */
 .jon-bois-card .card-body .d-flex {
-    flex-direction: row; /* Set flex direction to row */
+    flex-direction: row; 
 }
 
 /* Filters Container Styles */
@@ -71,7 +71,7 @@ body {
 /* Custom CSS for filter dropdowns */
 .form-control-sm {
     text-align: center;
-    width: 150px; /* Adjust the width as needed */
+    width: 150px; 
 }
 
 .noUi-connect {

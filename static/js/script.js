@@ -1,8 +1,6 @@
 fetch('/data')
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-
         const teamColors = {
             "Chennai Super Kings": "#fdc204",
             "Deccan Chargers": "#1a4667",
@@ -145,12 +143,10 @@ fetch('/data')
             title: 'IPL Scorigami',
             xaxis: {
                 title: 'First Innings Score',
-                range: [40, 300],
                 autorange: true
             },
             yaxis: {
                 title: 'Second Innings Score',
-                range: [40, 300],
                 autorange: true
             },
             hovermode: 'closest',
