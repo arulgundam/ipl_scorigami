@@ -20,7 +20,9 @@ fetch('/data')
         };
 
         const assignColor = (team, filterMode, selectedTeam) => {
-            if (!selectedTeam) {
+            if (!selectedTeam && filterMode) {
+                return teamColors[team] || 'rgb(30, 136, 229)'; // Team color when no team is selected and color switch is checked
+            } else if (!selectedTeam) {
                 return 'rgb(30, 136, 229)'; // Default color when no team is selected
             } else if (filterMode) {
                 return team ? teamColors[team] || 'rgb(30, 136, 229)' : 'rgb(30, 136, 229)';
@@ -28,7 +30,7 @@ fetch('/data')
                 return team === selectedTeam ? 'green' : 'red';
             }
         };
-
+        
         const seasons = [...new Set(data.map(d => d.season).filter(season => season !== null))]
             .map(season => parseInt(season))
             .sort((a, b) => a - b);
@@ -66,8 +68,6 @@ fetch('/data')
             const selectedSeasonRange = seasonRangeSlider.noUiSlider.get();
             const selectedTeam = teamFilter.value;
             const filterMode = colorSwitch.checked;
-
-            colorSwitch.disabled = !selectedTeam;
 
             const filteredData = data.filter(d =>
                 (selectedSeasonRange[0] <= d.season && d.season <= selectedSeasonRange[1]) &&
@@ -107,7 +107,6 @@ fetch('/data')
             seasonRangeSlider.noUiSlider.set([seasons[0], seasons[seasons.length - 1]]);
             teamFilter.value = '';
             colorSwitch.checked = false;
-            colorSwitch.disabled = true;
             applyFilters();
         };
 
