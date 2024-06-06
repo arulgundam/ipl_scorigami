@@ -25,9 +25,9 @@ fetch('/data')
             if (!selectedTeam) {
                 return 'rgb(30, 136, 229)'; // Default color when no team is selected
             } else if (filterMode) {
-                return team === selectedTeam ? 'green' : 'red';
-            } else {
                 return team ? teamColors[team] || 'rgb(30, 136, 229)' : 'rgb(30, 136, 229)';
+            } else {
+                return team === selectedTeam ? 'green' : 'red';
             }
         };
 
