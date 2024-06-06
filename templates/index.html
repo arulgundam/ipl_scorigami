@@ -19,7 +19,7 @@
         <h1 class="text-center mt-2 mb-2">IPL Scorigami</h1>
     </div>
     <div class="container-fluid main-container">
-        <div class="row">
+        <div class="row intro-container">
             <div class="col-md-10 offset-md-1">
                 <div class="card main-card">
                     <div class="card-body">
@@ -30,19 +30,12 @@
         </div>
         <!-- Filters Container -->
         <div class="row mt-2 mb-2 filters-container">
-            <div class="col-md-10 offset-md-1 d-flex justify-content-center align-items-center">
-                <!-- Season Filter -->
-                <div id="seasonRangeSlider" class="mr-3" style="width: 200px;"></div>
-                    <select id="seasonFilter" class="form-control form-control-sm btn-outline-info">
-                        <option value="">All IPL Seasons</option>
-                        <!-- Options will be populated dynamically -->
-                    </select>
-                </div>
-                <!-- Reset Button -->
-                <button type="button" class="btn btn-danger mr-3" id="resetFilters">Reset</button>
+            <div class="col-md-10 offset-md-1 d-flex justify-content-between align-items-center">
+                <!-- Season Range Slider -->
+                <div id="seasonRangeSlider" style="width: 200px;"></div>
                 <!-- Team Filter -->
                 <div class="form-group mb-0">
-                    <select id="teamFilter" class="form-control form-control-sm btn-outline-info">
+                    <select id="teamFilter" class="form-control form-control-sm btn-outline-primary">
                         <option value="">All IPL Teams</option>
                         <!-- Options will be populated dynamically -->
                     </select>
@@ -52,8 +45,11 @@
                     <input type="checkbox" class="custom-control-input" id="flexSwitchCheckChecked" disabled>
                     <label class="custom-control-label" for="flexSwitchCheckChecked">Color By Result</label>
                 </div>
+                <!-- Reset Button -->
+                <button type="button" class="btn btn-danger" id="resetFilters">Reset</button>
             </div>
         </div>
+        <!---- Main Plot -->
         <div class="row mt-4">
             <div class="col-md-10 offset-md-1">
                 <div class="card main-card">
